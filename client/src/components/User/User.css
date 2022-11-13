@@ -1,0 +1,6 @@
+.UnfollowButton{
+    background: transparent;
+    color: var(--orange);
+    border: 2px solid var(--orange);
+    cursor: pointer;
+}
