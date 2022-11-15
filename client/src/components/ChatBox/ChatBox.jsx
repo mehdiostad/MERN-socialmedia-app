@@ -8,11 +8,13 @@ import { format } from "timeago.js";
 import InputEmoji from "react-input-emoji";
 import {io} from "socket.io-client"
 import { useRef } from "react";
+import {useSelector} from "react-redux"
 const ChatBox = ({ chat, currentUserId }) => {
   const [userData, setUserData] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [onlineUsers , setOnlineUsers] = useState([])
+  const {user} = useSelector(state => state.authReducer.authData)
   const socket = useRef()
   // fetch data for heaer
   useEffect(() => {

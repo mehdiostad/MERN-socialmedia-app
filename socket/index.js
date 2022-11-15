@@ -14,14 +14,14 @@ io.on("connection", (socket) => {
         userId: newUserId,
         socketId: socket.id,
       });
-      console.log("New User Connected");
+      console.log("New User Connected", activeUsers);
     }
     io.emit("get-users", activeUsers);
   });
   io.on("disconnect", () => {
     let activeUsers = activeUsers.filter((user) => user.socketId !== socket.id);
 
-    console.log("user disconnetcted");
+    console.log("user disconnetcted" , activeUsers);
     io.emit("get-users", activeUsers);
   });
 });
