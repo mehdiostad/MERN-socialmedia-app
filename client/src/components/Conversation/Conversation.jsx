@@ -40,7 +40,7 @@ const Conversation = ({ data, currentUserId }) => {
           </div>
         </div>
       </div>
-      <hr />
+      <hr  style={{width:"85%", border:"0.1px solid #ececec"}}/>
     </>
   );
 };

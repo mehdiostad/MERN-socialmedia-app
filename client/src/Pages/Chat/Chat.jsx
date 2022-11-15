@@ -34,6 +34,7 @@ const Chat = () => {
           <div className="Chat-list">
             {chats.map((chat) => (
               <div onClick={() => setCurrentChat(chat)}>
+                
                 <Conversation data={chat} currentUserId={user._id} />
               </div>
             ))}
