@@ -1,13 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { getMessages } from "../../api/MessageRequest";
+import { addMessage, getMessages } from "../../api/MessageRequest";
 import { getUser } from "../../api/UserRequest";
 import "./ChatBox.css";
 import { format } from "timeago.js";
 import InputEmoji from "react-input-emoji";
-import { useRef } from "react";
-import {useSelector} from "react-redux"
+
 const ChatBox = ({ chat, currentUserId }) => {
   const [userData, setUserData] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -44,7 +43,21 @@ const ChatBox = ({ chat, currentUserId }) => {
     if (chat !== null) fetchMessageData();
   }, [chat]);
 
- 
+ const handleSend = async (e) =>{
+  e.preventDefault()
+  const message ={
+    senderId:currentUserId, 
+    text:newMessage, 
+    chatId:chat._id
+  }
+  try {
+    const {data} = await addMessage(message)
+    setMessages([...messages, data])
+  } catch (error) {
+    console.log(error)
+  }
+  setNewMessage("")
+ }
 
   const handleChange = (newMessage) => {
     setNewMessage(newMessage);
@@ -100,7 +113,7 @@ const ChatBox = ({ chat, currentUserId }) => {
             <div className="chat-sender">
               <div>+</div>
               <InputEmoji value={newMessage} onChange={handleChange} />
-              <div className="button send-button">Send</div>
+              <div className="button send-button" onClick={handleSend}>Send</div>
             </div>
           </>
         ) : (
