@@ -6,16 +6,15 @@ import { getUser } from "../../api/UserRequest";
 import "./ChatBox.css";
 import { format } from "timeago.js";
 import InputEmoji from "react-input-emoji";
-import {io} from "socket.io-client"
 import { useRef } from "react";
 import {useSelector} from "react-redux"
 const ChatBox = ({ chat, currentUserId }) => {
   const [userData, setUserData] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [onlineUsers , setOnlineUsers] = useState([])
-  const {user} = useSelector(state => state.authReducer.authData)
-  const socket = useRef()
+ 
+
+
   // fetch data for heaer
   useEffect(() => {
     const userId = chat?.members?.find((member) => member !== currentUserId);
@@ -45,16 +44,11 @@ const ChatBox = ({ chat, currentUserId }) => {
     if (chat !== null) fetchMessageData();
   }, [chat]);
 
-  useEffect(()=>{
-    socket.current = io('http://localhost:8800')
-    socket.current.emit('new-user-add', user._id)
-    socket.current.on("get-users" , users => {
-      setOnlineUsers(users)
-    })
-  } , [user])
+ 
 
-  const handleChange = () => {
+  const handleChange = (newMessage) => {
     setNewMessage(newMessage);
+    console.log(newMessage);
   };
 
   return (
