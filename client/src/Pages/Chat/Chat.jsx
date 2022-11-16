@@ -19,6 +19,8 @@ const Chat = () => {
   const [chats, setChats] = useState([]);
   const [currentChat , setCurrentChat] = useState(null)
   const [onlineUsers , setOnlineUsers] = useState([])
+  const [sendMessage, setSendMessage] = useState(null)
+  const [recievedMessage, setRecievedMessage] = useState(null)
   const socket = useRef()
   useEffect(() => {
     const getChats = async () => {
@@ -35,7 +37,22 @@ const Chat = () => {
       setOnlineUsers(users)
     })
   } , [user])
+  
+  // send message to socket server
+  useEffect(()=>{
+    if(sendMessage !== null){
+      console.log(sendMessage);
+      socket.current.emit('send-message' , sendMessage)
+    }
+  }, [sendMessage])
 
+  //recieve message from socket server
+  useEffect(()=>{
+    socket.current.on("recieve-message"  , data=>{
+      console.log(data);
+      setRecievedMessage(data)
+    })
+  },[])
   return (
     <div className="Chat">
       {/* Left Side */}
@@ -66,7 +83,7 @@ const Chat = () => {
             </Link>
           </div>
         </div>
-          <ChatBox chat={currentChat} currentUserId={user._id} />
+          <ChatBox chat={currentChat} currentUserId={user._id}  setSendMessage ={setSendMessage} recievedMessage={recievedMessage}/>
       </div>
     </div>
   );
