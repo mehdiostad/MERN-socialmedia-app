@@ -18,8 +18,8 @@ io.on("connection", (socket) => {
     }
     io.emit("get-users", activeUsers);
   });
-  io.on("disconnect", () => {
-    let activeUsers = activeUsers.filter((user) => user.socketId !== socket.id);
+  socket.on("disconnect", () => {
+   activeUsers = activeUsers.filter((user) => user.socketId !== socket.id);
 
     console.log("user disconnetcted" , activeUsers);
     io.emit("get-users", activeUsers);
