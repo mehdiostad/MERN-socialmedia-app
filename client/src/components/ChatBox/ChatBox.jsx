@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { addMessage, getMessages } from "../../api/MessageRequest";
@@ -11,6 +11,7 @@ const ChatBox = ({ chat, currentUserId , setSendMessage, recievedMessage}) => {
   const [userData, setUserData] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const scroll = useRef()
 
   // fetch data for heaer
   useEffect(() => {
@@ -72,6 +73,10 @@ const ChatBox = ({ chat, currentUserId , setSendMessage, recievedMessage}) => {
     console.log(newMessage);
   };
 
+  useEffect(()=>{
+    scroll?.current?.scrollIntoView({behavior: "smooth"})
+  }, [messages])
+
   return (
     <>
       <div className="ChatBox-container">
@@ -106,6 +111,7 @@ const ChatBox = ({ chat, currentUserId , setSendMessage, recievedMessage}) => {
               {messages.map((message) => (
                 <>
                   <div
+                  ref={scroll}
                     className={
                       message.senderId === currentUserId
                         ? "message own"
