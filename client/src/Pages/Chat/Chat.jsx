@@ -56,9 +56,8 @@ const Chat = () => {
 
   const checkOnlineUser = (chat) =>{
     const chatMember = chat.members.find(member => member !== user._id)
-    const online = onlineUsers.find(user=> user.userId === chatMember)
-   
-    return online ? true : false;
+    const online = onlineUsers.some(user=> user.userId === chatMember)
+    return online
   }
 
   return (
