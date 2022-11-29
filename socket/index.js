@@ -1,7 +1,7 @@
-import { Server } from "socket.io";
-
-const io = new Server({
-  path: "51.89.107.233/socket"
+const io = require("socket.io")(8800, {
+  cors: {
+    origin: "http://localhost:3000",
+  },
 });
 
 let activeUsers = [];

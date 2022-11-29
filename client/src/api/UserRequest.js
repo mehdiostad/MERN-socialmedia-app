@@ -2,7 +2,7 @@ import axios from "axios";
 // const baseURL = "http://localhost:5000/"
 const baseURL ="http://51.89.107.233/api/"
 
-const API = axios.create({baseURL: "http://localhost:5000"})
+const API = axios.create({baseURL})
 
 API.interceptors.request.use((req) => {
     if (localStorage.getItem('profile')) {
