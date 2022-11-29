@@ -31,7 +31,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
     auth: { authSource: "admin" },
-    user: process.env.USER,
+    user: process.env.USERNAME,
     pass: process.env.PASS,
   })
   .then(() =>
