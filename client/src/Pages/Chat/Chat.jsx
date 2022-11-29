@@ -32,7 +32,7 @@ const Chat = () => {
 
   useEffect(()=>{
     socket.current = io({
-      path: "/my-custom-path/"
+      path: "51.89.107.233/socket"
     })
     socket.current.emit('new-user-add', user._id)
     socket.current.on("get-users" , users => {
