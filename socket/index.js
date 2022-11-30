@@ -2,7 +2,8 @@ const io = require("socket.io")(8800, {
   cors: {
     origin: "http://51.89.107.233",
   },
-});
+  
+},{'transports': ['websocket', 'polling']});
 
 let activeUsers = [];
 
