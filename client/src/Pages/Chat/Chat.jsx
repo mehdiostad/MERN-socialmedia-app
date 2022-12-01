@@ -13,7 +13,7 @@ import Comment from "../../img/comment.png";
 import { UilSetting } from "@iconscout/react-unicons";
 import ChatBox from "../../components/ChatBox/ChatBox";
 import {io} from "socket.io-client"
-const ENDPOINT ="http://51.89.107.233/socket.io"
+
 const Chat = () => {
   const { user } = useSelector((state) => state.authReducer.authData);
   const [chats, setChats] = useState([]);
@@ -31,12 +31,12 @@ const Chat = () => {
   }, [user]);
 
   useEffect(()=>{
-    socket.current = io(ENDPOINT)
+    socket.current = io("http://51.89.107.233:8800" , {'transports': ['websocket', 'polling']})
     socket.current.emit('new-user-add', user._id)
     socket.current.on("get-users" , users => {
       setOnlineUsers(users)
     })
-  } , [ENDPOINT, user])
+  } , [user])
   
   // send message to socket server
   useEffect(()=>{
