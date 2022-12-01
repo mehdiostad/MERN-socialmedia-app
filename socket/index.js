@@ -1,6 +1,6 @@
 const io = require("socket.io")(8800, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "http://51.89.107.233",
     transports: ['websocket', 'polling'],
     credentials: true,
     allowEIO3: true
