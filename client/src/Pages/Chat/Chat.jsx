@@ -31,7 +31,7 @@ const Chat = () => {
   }, [user]);
 
   useEffect(()=>{
-    socket.current = io("http://51.89.107.233:8800" , {'transports': ['websocket', 'polling']})
+    socket.current = io("http://mehdimedia.tk:8800" , {'transports': ['websocket', 'polling']})
     socket.current.emit('new-user-add', user._id)
     socket.current.on("get-users" , users => {
       setOnlineUsers(users)
