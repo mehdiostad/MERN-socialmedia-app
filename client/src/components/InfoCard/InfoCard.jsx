@@ -20,19 +20,19 @@ const InfoCard = () => {
       if (profileUserId === user._id) {
         setProfileUser(user);
       } else {
-        const profileUser = await userApi.getUser(profileUserId);
-        setProfileUser(profileUser);
+        const {data} = await userApi.getUser(profileUserId);
+        setProfileUser(data);
       }
     };
     fetchProfileUser();
-  }, [user]);
+  }, [profileUserId, user]);
 
   const handleLogOut = () => {
     dispatch(logOut())
   };
 
   return (
-    <div className="InfoCard">
+    <div className={params.id == user._id ? "InfoCard" : "userInfoCard"}>
       <div className="InfoHead">
         <h4>Profile Info</h4>
         {user._id === profileUserId ? (
@@ -74,9 +74,12 @@ const InfoCard = () => {
           <span>{profileUser.worksAt}</span>
         </div>
       </div>
+      {params.id == user._id && 
+      
       <button className="button logout-button" onClick={handleLogOut}>
         Logout
       </button>
+      }
     </div>
   );
 };

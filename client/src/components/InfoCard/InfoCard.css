@@ -23,3 +23,13 @@
 .InfoHead>div:hover{
   cursor: pointer;
 }
+.userInfoCard{
+  display: flex;
+  flex-direction: column;
+  background-color: var(--cardColor);
+  border-radius: 1rem;
+  padding: 1rem;
+  width: 90%;
+  gap: 0.75rem;
+  height: 17rem;
+}

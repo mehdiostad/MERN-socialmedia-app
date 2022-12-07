@@ -3,6 +3,8 @@ import "./User.css"
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { followUser, unFollowUser } from "../../Actions/UserAction";
+import {Link} from 'react-router-dom'
+
 const User = ({ person, key }) => {
   const dispatch = useDispatch();
   const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -28,10 +30,12 @@ const User = ({ person, key }) => {
           alt=""
           className="followerImage"
         />
+        <Link to={`/userprofile/${person._id}`} style={{textDecoration:'none', color:"inherit"}}>
         <div className="name">
           <span>{person.firstname}</span>
           <span>@{person.username}</span>
         </div>
+          </Link>
       </div>
       <button
         className={
